@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import SelectSong from './select_song';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <SelectSong />
   </React.StrictMode>,
   document.getElementById('root')
 );
