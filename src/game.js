@@ -693,7 +693,7 @@ class Game extends React.Component {
 		  try {
 			console.log(44);
 			const port = await navigator.serial.requestPort();
-			await port.open({ baudRate: 115200  });
+			await port.open({ baudRate: 9600  });
 			console.log(55);
 			const decoder = new window.TextDecoderStream();
 			
@@ -737,7 +737,7 @@ class Game extends React.Component {
 			
 		  try {
 			const port = await navigator.serial.requestPort();
-			await port.open({ baudRate: 115200  });
+			await port.open({ baudRate: 9600  });
 			
 			const decoder = new window.TextDecoderStream();
 			
