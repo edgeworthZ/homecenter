@@ -507,9 +507,43 @@ img {
   z-index: -100;
 }
 
+.play__button {
+	display: none;
+	cursor: pointer;
+	position: absolute;
+	top: 3.5%;
+    left: 89.5%;
+	transform: translate(-50%, -50%);
+	width: 30px;
+	opacity: 0;
+	z-index: 1;
+	transition: .5s;
+}
+
+.pause__button {
+	cursor: pointer;
+	position: absolute;
+	top: 3.5%;
+    left: 89.5%;
+	transform: translate(-50%, -50%);
+	width: 30px;
+	opacity: 0;
+	z-index: 1;
+	transition: .5s;
+}
+
+.play__button:hover{
+  /*-o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  transition:.5s;
+  transform: scale(1.02);*/
+}
+
 .summary__timer {
   position: absolute;
-  top: 2.5%;
+  top: 3.5%;
   left: 92.5%;
   transform: translate(-50%, -50%);
   width: 100%;

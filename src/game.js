@@ -46,9 +46,6 @@ class Game extends React.Component {
 		var left;
 		var right;
 
-		var isSwitchPlaying;
-		var isSwitchStopping;
-
 		var dataPath = "data/data.json";
 		var statusPath = "data/debug_status.json";
 		var messagePath = "http://localhost:3000";
@@ -89,10 +86,17 @@ class Game extends React.Component {
 				.then(response => response.json())
 				.then((data) => {
 					//console.log(data);
-					isSwitchPlaying = data.isPlaying;
-					isSwitchStopping = data.isStopping;
-					
-					if(isSwitchStopping){ // go to home page
+					if(data.isPlaying && !window.$isPlaying){
+						document.querySelector('.play__button').style.display = 'none';
+						document.querySelector('.pause__button').style.display = 'block';
+						Play();
+					}else if(!data.isPlaying && window.$isPlaying){
+						document.querySelector('.play__button').style.display = 'block';
+						document.querySelector('.pause__button').style.display = 'none';
+						Pause();
+					}
+
+					if(data.isStopping){ // go to home page
 						window.location.href = "home";
 					}
 				}).catch((error) => {
@@ -308,6 +312,8 @@ class Game extends React.Component {
 			
 			document.querySelector('.menu').style.opacity = 0;
 			document.querySelector('.game').style.opacity = 1;
+			document.querySelector('.play__button').style.opacity = 1;
+			document.querySelector('.pause__button').style.opacity = 1;
 			document.querySelector('.song').play();
 			document.querySelector('.menu').style.zIndex = -100;
 			/*var audio = new Audio("media/music.mp3");
@@ -386,6 +392,8 @@ class Game extends React.Component {
 		  document.querySelector('.score__count').innerHTML = score;
 		  document.querySelector('.game').style.opacity = 0;
 		  document.querySelector('.summary__timer').style.opacity = 0;
+		  document.querySelector('.play__button').style.opacity = 0;
+		  document.querySelector('.pause__button').style.opacity = 0;
 		  document.querySelector('.summary__result').style.opacity = 1;
 		  document.querySelector('.summary').style.zIndex = 1;
 		};
@@ -450,17 +458,8 @@ class Game extends React.Component {
 		  document.addEventListener('keydown', keydownHandler);
 		  document.addEventListener('keyup', keyupHandler);
 		};
-
-		var getKeyIndex = function (key) {
-			//console.log(key);
-			
-		  if (key === 's') {
-			return 0;
-		  } else if (key === 'l') {
-			return 1;
-		  }
-		  
-		  if ( (key === 'g' || !isSwitchPlaying) && window.$isPlaying) {
+		
+		function Pause(){
 			window.$isPlaying = false;
 			
 			document.querySelector('.song').pause();
@@ -476,9 +475,11 @@ class Game extends React.Component {
 			document.querySelectorAll('.note').forEach(function (note) {
 			  note.style.animationPlayState = 'paused';
 			});
-		  }else if ( (key === 'h' || isSwitchPlaying) && !window.$isPlaying) {
+		}
+		
+		function Play(){
 			window.$isPlaying = true;
-			
+
 			document.querySelector('.song').play();
 			//timer.resume();
 			pausedDuration += Date.now()- pauseStarted;
@@ -492,6 +493,21 @@ class Game extends React.Component {
 			document.querySelectorAll('.note').forEach(function (note) {
 			  note.style.animationPlayState = 'running';
 			});
+		}
+
+		var getKeyIndex = function (key) {
+			//console.log(key);
+			
+		  if (key === 's') {
+			return 0;
+		  } else if (key === 'l') {
+			return 1;
+		  }
+		  
+		  if ( key === 'g' && window.$isPlaying) {
+			Pause();
+		  }else if ( key === 'h' && !window.$isPlaying) {
+			Play();
 		  }
 		};
 
@@ -623,6 +639,20 @@ class Game extends React.Component {
 		  }
 		}
 		/*}*/
+		
+		/*document.querySelector('.play__button').addEventListener('click', () => {
+		  //console.log(888);
+		  document.querySelector('.play__button').style.display = 'none';
+		  document.querySelector('.pause__button').style.display = 'block';
+		  Play();
+		});
+		
+		document.querySelector('.pause__button').addEventListener('click', () => {
+		  //console.log(888);
+		  document.querySelector('.play__button').style.display = 'block';
+		  document.querySelector('.pause__button').style.display = 'none';
+		  Pause();
+		});*/
 
 		/* back && next navigation */
 		if(window.$left){
@@ -848,6 +878,9 @@ class Game extends React.Component {
 				
 			  </div>
 
+			  <img className="play__button" src="/img/buttonP.png" />
+			  <img className="pause__button" src="/img/buttonS.png" />
+			  
 			  <div className="summary">
 				<div className="summary__timer"></div>
 				<div className="summary__result">
