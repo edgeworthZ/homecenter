@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import SelectSong from './select_song';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
-    <SelectSong />
+    <BrowserRouter>
+		<App /> {/* The various pages will be displayed by the `Routes` component. */}
+	</BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
