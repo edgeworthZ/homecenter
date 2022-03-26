@@ -41,7 +41,9 @@ class Game extends React.Component {
 		var song;
 		var songId = window.location.pathname.split('/').pop().slice(2);
 		window.$game = window.location.pathname.split('/').pop();
-		window.$mode = window.location.pathname.split('/').pop()[1]; 
+		window.$mode = window.location.pathname.split('/').pop()[1];
+		
+		var gameStart;
 
 		var left;
 		var right;
@@ -86,6 +88,8 @@ class Game extends React.Component {
 				.then(response => response.json())
 				.then((data) => {
 					//console.log(data);
+					if(!gameStart) return;
+					
 					if(data.isPlaying && !window.$isPlaying){
 						document.querySelector('.play__button').style.display = 'none';
 						document.querySelector('.pause__button').style.display = 'block';
@@ -316,6 +320,7 @@ class Game extends React.Component {
 			document.querySelector('.pause__button').style.opacity = 1;
 			document.querySelector('.song').play();
 			document.querySelector('.menu').style.zIndex = -100;
+			gameStart = true;
 			/*var audio = new Audio("media/music.mp3");
 			audio.play();*/
 			document.querySelectorAll('.note').forEach(function (note) {
