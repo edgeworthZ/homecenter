@@ -219,7 +219,7 @@ img {
 .lyric__upper__text {
   width: 100%;
   height: 50%;
-  font-size: 3.5rem;
+  font-size: 1.75vw;
   color: rgba(255, 255, 255, .8);
   opacity: 0;
   transition: all 1s;
@@ -228,7 +228,7 @@ img {
 .lyric__lower__text {
   width: 100%;
   height: 50%;
-  font-size: 3.5rem;
+  font-size: 1.75vw;
   color: rgba(255, 255, 255, .8);
   opacity: 0;
   transition: all 1s;
@@ -509,7 +509,7 @@ img {
 
 .play__button {
 	display: none;
-	cursor: pointer;
+	/*cursor: pointer;*/
 	position: absolute;
 	top: 3.5%;
     left: 89.5%;
@@ -521,7 +521,7 @@ img {
 }
 
 .pause__button {
-	cursor: pointer;
+	/*cursor: pointer;*/
 	position: absolute;
 	top: 3.5%;
     left: 89.5%;
