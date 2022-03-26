@@ -4,7 +4,7 @@ import Home from './home';
 import Mode from './mode';
 import Song from './song';
 import Game from './game';
-
+import Replay from './replay';
 
 const Routes = () => {
   return (
@@ -13,6 +13,7 @@ const Routes = () => {
 	  <Route path='/mode' component={Mode}></Route>
     <Route path='/song-:id' component={Song}></Route>
 	  <Route path='/m:id' component={Game}></Route>
+	  <Route path='/r' component={Replay}></Route>
 	  <Route render={() => <Redirect to={{pathname: "/"}} />} />
     </Switch>
   );

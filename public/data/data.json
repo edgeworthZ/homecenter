@@ -47,7 +47,7 @@
 	  "duration": 56,
 	  "sheet": ["s", "l"],
 	  "lyrics": [
-		{ "upperText": "I want to be your friend.", "lowerText": "I won't leave you.", "delay": 1.0 },
+		{ "upperText": "I want to be your friend.I want to be your friend.", "lowerText": "I won't leave you.", "delay": 1.0 },
 		{ "upperText": "Because you're here with me.", "lowerText": "When I'm alone.", "delay": 3.0 },
 		{ "upperText": "I want to be your friend.", "lowerText": "I won't leave you.", "delay": 6.0 },
 		{ "upperText": "Because you're here with me.", "lowerText": "When I'm alone.", "delay": 9.0 },

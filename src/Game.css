@@ -31,6 +31,15 @@ body {
   font-family: "Playball";
   background: var(--background);
   overflow: hidden;
+  
+  /* no select */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
 main {
@@ -473,6 +482,10 @@ img {
   transform: scale(0.95);
 }
 
+.speed__box{
+	display: flex;
+}
+
 .game-start-button {
   border: 2px solid var(--hit-color);
   border-radius: 50%;
@@ -547,7 +560,7 @@ img {
 .lyric__upper__text {
   width: 100%;
   height: 50%;
-  font-size: 3.5rem;
+  font-size: 1.75vw;
   color: rgba(255, 255, 255, .8);
   opacity: 0;
   transition: all 1s;
@@ -556,7 +569,7 @@ img {
 .lyric__lower__text {
   width: 100%;
   height: 50%;
-  font-size: 3.5rem;
+  font-size: 1.75vw;
   color: rgba(255, 255, 255, .8);
   opacity: 0;
   transition: all 1s;
@@ -778,7 +791,12 @@ img {
 }
 
 .config__speed {
-	display: none;
+	opacity: 0;
+	/*display: none;*/
+}
+
+.menu_start_s{
+	opacity: 0;
 }
 
 .config__speed .btn--selected {
@@ -830,9 +848,43 @@ img {
   z-index: -100;
 }
 
+.play__button {
+	display: none;
+	/*cursor: pointer;*/
+	position: absolute;
+	top: 3.5%;
+    left: 89.5%;
+	transform: translate(-50%, -50%);
+	width: 30px;
+	opacity: 0;
+	z-index: 1;
+	transition: .5s;
+}
+
+.pause__button {
+	/*cursor: pointer;*/
+	position: absolute;
+	top: 3.5%;
+    left: 89.5%;
+	transform: translate(-50%, -50%);
+	width: 30px;
+	opacity: 0;
+	z-index: 1;
+	transition: .5s;
+}
+
+.play__button:hover{
+  /*-o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  transition:.5s;
+  transform: scale(1.02);*/
+}
+
 .summary__timer {
   position: absolute;
-  top: 2.5%;
+  top: 3.5%;
   left: 92.5%;
   transform: translate(-50%, -50%);
   width: 100%;
