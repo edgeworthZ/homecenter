@@ -6,7 +6,14 @@ var songId = window.location.pathname.split('/').pop().slice(2);
 var left;
 var right;
 
-fetch("data/data.json",{
+var isSwitchPlaying;
+var isSwitchStopping;
+
+var dataPath = "data/data.json";
+var statusPath = "data/debug_status.json";
+var messagePath = "http://localhost:3000";
+
+fetch(dataPath,{
 	method: "GET",
 	headers: {
 		"Access-Control-Allow-Origin": "*",
@@ -26,6 +33,62 @@ fetch("data/data.json",{
 		console.log(error);
 		//this.setState({ redirect: "/landing" });
 	});
+  
+function GetHardwareStatus(){
+	fetch(statusPath,{
+	method: "GET",
+		headers: {
+			"Access-Control-Allow-Origin": "*",
+			"Access-Control-Allow-Methods": "*",
+			"Access-Control-Allow-Credentials": true,
+			"Content-Type": "application/json"
+		},
+	})
+		.then(response => response.json())
+		.then((data) => {
+			//console.log(data);
+			isSwitchPlaying = data.isPlaying;
+			isSwitchStopping = data.isStopping;
+			
+			if(isSwitchStopping){ // go to home page
+				window.location.href = "home";
+			}
+		}).catch((error) => {
+			console.log(error);
+			//this.setState({ redirect: "/landing" });
+		});
+	
+	
+	return false;
+}
+
+function SendScore(score){
+	var message = {};
+	message['score'] = score;
+	
+	fetch(messagePath,{
+		method: "POST",
+		headers: {
+			"Access-Control-Allow-Origin": "*",
+			"Access-Control-Allow-Methods": "*",
+			"Access-Control-Allow-Credentials": true,
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(message),
+	})
+		.then(response =>  {
+			console.log(response);
+		})
+		.catch((error) => {
+			console.log('add Error!');
+			//this.setState({ redirect: "/landing" });
+		});
+}
+
+setInterval(function () {
+   GetHardwareStatus();
+   console.log(top.serial);
+  }, 200);
   
 /*var mydata = JSON.parse(data);
 alert(mydata[0].song.duration);
@@ -271,6 +334,7 @@ function prTimer(seconds, container, oncomplete) {
 };*/
 
 var showResult = function () {
+  SendScore(score);
   document.querySelector('.perfect__count').innerHTML = hits.perfect;
   document.querySelector('.good__count').innerHTML = hits.good;
   document.querySelector('.bad__count').innerHTML = hits.bad;
@@ -296,14 +360,26 @@ var setupNoteMiss = function () {
   });
 };
 
+window.onhashchange = function() {
+ //blah blah blah
+ console.log(4);
+}
+
+window.addEventListener('popstate', function(event) {
+	//alert(4);
+	console.log('RemoveKeys!');
+	document.removeEventListener('keydown', keydownHandler);
+	document.removeEventListener('keyup', keyupHandler);
+}, false);
+
 /**
  * Allows keys to be only pressed one time. Prevents keydown event
  * from being handled multiple times while held down.
  */
-var setupKeys = function () {
-  document.querySelector('.key-container').style.opacity = 1;
-	
-  document.addEventListener('keydown', function (event) {
+ 
+ 
+var keydownHandler = function (event) {
+	//console.log('Down');
     var keyIndex = getKeyIndex(event.key);
 
     if (Object.keys(isHolding).indexOf(event.key) !== -1
@@ -315,25 +391,34 @@ var setupKeys = function () {
         judge(keyIndex);
       }
     }
-  });
+}
 
-  document.addEventListener('keyup', function (event) {
+var keyupHandler = function (event){
+	//console.log('up');
     if (Object.keys(isHolding).indexOf(event.key) !== -1) {
       var keyIndex = getKeyIndex(event.key);
       isHolding[event.key] = false;
       keypress[keyIndex].style.display = 'none';
     }
-  });
+}
+ 
+var setupKeys = function () {
+  console.log('SetupKeys!');
+  document.querySelector('.key-container').style.opacity = 1;
+  document.addEventListener('keydown', keydownHandler);
+  document.addEventListener('keyup', keyupHandler);
 };
 
 var getKeyIndex = function (key) {
+    //console.log(key);
+	
   if (key === 's') {
     return 0;
   } else if (key === 'l') {
     return 1;
   }
   
-  if (key === 'g' && isPlaying) {
+  if ( (key === 'g' || !isSwitchPlaying) && isPlaying) {
 	isPlaying = false;
 	
 	document.querySelector('.song').pause();
@@ -349,7 +434,7 @@ var getKeyIndex = function (key) {
 	document.querySelectorAll('.note').forEach(function (note) {
       note.style.animationPlayState = 'paused';
     });
-  }else if (key === 'h' && !isPlaying) {
+  }else if ( (key === 'h' || isSwitchPlaying) && !isPlaying) {
 	isPlaying = true;
 	
 	document.querySelector('.song').play();
@@ -504,6 +589,7 @@ if(right){
 }
 
 document.getElementById('connectButtonL').addEventListener('click', () => {
+  console.log(888);
   if (navigator.serial) {
     connectSerialL();
   } else {
@@ -512,6 +598,7 @@ document.getElementById('connectButtonL').addEventListener('click', () => {
 });
 
 document.getElementById('connectButtonR').addEventListener('click', () => {
+	  console.log(444);
   if (navigator.serial) {
     connectSerialR();
   } else {
@@ -523,9 +610,10 @@ async function connectSerialR() {
   //const log = document.getElementById('target');
     
   try {
+	console.log(44);
     const port = await navigator.serial.requestPort();
     await port.open({ baudRate: 115200  });
-    
+    console.log(55);
     const decoder = new TextDecoderStream();
     
     port.readable.pipeTo(decoder.writable);
@@ -541,7 +629,7 @@ async function connectSerialR() {
 		
         //log.textContent += value + '\n';
 		console.log('Right: '+value);
-		if(value === 'T'){
+		if(value === '1'){
 			right = true;
 			if (isPlaying && tracks[1].firstChild && window.location.pathname.split('/').pop()[0] === 'm') {
 				judge(1);
@@ -582,7 +670,7 @@ async function connectSerialL() {
 		  
         //log.textContent += value + '\n';
 		console.log('Left: '+value);
-		if(value === 'T'){
+		if(value === '1'){
 			left = true;
 			if (isPlaying && tracks[0].firstChild && window.location.pathname.split('/').pop()[0] === 'm') {
 				judge(0);
