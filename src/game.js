@@ -51,12 +51,19 @@ class Game extends React.Component {
 		var right;
 
 		var dataPath = "data/data.json";
-		var statusPath = "http://localhost:55555/status";
+		/*var statusPath = "http://localhost:55555/status";
 		var scorePath = "http://localhost:55555/score";
 		var stopPath = "http://localhost:55555/status/stop";
 		var playPath = "http://localhost:55555/status/play";
 		var pausePath = "http://localhost:55555/status/pause";
-		var finishPath = "http://localhost:55555/status/finish";
+		var finishPath = "http://localhost:55555/status/finish";*/
+		
+		var statusPath = "https://homecenter-backend.herokuapp.com/status";
+		var scorePath = "https://homecenter-backend.herokuapp.com/score";
+		var stopPath = "https://homecenter-backend.herokuapp.com/status/stop";
+		var playPath = "https://homecenter-backend.herokuapp.com/status/play";
+		var pausePath = "https://homecenter-backend.herokuapp.com/status/pause";
+		var finishPath = "https://homecenter-backend.herokuapp.com/status/finish";
 
 		fetch(dataPath,{
 			method: "GET",
