@@ -138,16 +138,14 @@ img {
 }
 
 .song_bg{
-  position: absolute;
-  /*height: 32Vw;*/
+  position: relative;
   height: 32Vw;
-  width: 80%;
-  top: 60%;
-  left: 50%;
+  /*height: auto;*/
+  width: 100%;
   /*margin-left: 50%;*/
-  transform: translate(-50%, -50%);
   background-color: rgba(204, 51, 99, 1);
   overflow: scroll;
+  /*padding-top: 20%;*/
 }
 
 .song_rol{
@@ -188,279 +186,69 @@ img {
   color: #666;
 }
 
-.songfi{
+/*.songfi{
   position: absolute;
-  /*height: 32Vw;*/
   height: 10Vw;
   width: 15.1%;
   top: 28%;
   left: 18.8Vw;
-  /*margin-left: 50%;*/
-  transform: translate(-50%, -50%);
-  background-color: rgba(204, 51, 99, 1);
-  border-radius: 2Vw;
-}
-
-.songfi11{
-  position: absolute;
-  /*height: 32Vw;*/
-  height: 10Vw;
-  width: 15.1%;
-  top: 28%;
-  left: 18.8Vw;
-  /*margin-left: 50%;*/
   transform: translate(-50%, -50%);
   background-color: rgb(238, 192, 206);
   border-radius: 2Vw;
+}*/
+
+.box{
+  width: 90%;
+  margin-top: 7.5%;
+  margin-left: 5%;
 }
 
-.songfi11:hover{
-  position: absolute;
-  /*height: 32Vw;*/
-  height: 10Vw;
-  width: 15.1%;
-  top: 28%;
-  left: 18.8Vw;
-  /*margin-left: 50%;*/
-  transform: translate(-50%, -50%);
-  background-color: rgb(145, 124, 130);
-  border-radius: 2Vw;
+.tabs{
+  display: flex;
+  justify-content: space-between;
+  width: 50Vw;
+  height: auto;
 }
 
-.songfi2{
-  position: absolute;
-  /*height: 32Vw;*/
-  height: 10Vw;
-  width: 15.1%;
-  top: 28%;
-  left: 34.97Vw;
-  /*margin-left: 50%;*/
-  transform: translate(-50%, -50%);
-  background-color: rgb(238, 192, 206);
-  border-radius: 2Vw;
+.tab{
+  flex: 1;
+  text-align: center;
+  font-size: 3Vw;
+  font-weight: 400;
+  cursor: pointer;
+  position: relative;
+  width: 30Vw;
+  height: 4.5Vw;
+  background: rgba(253, 207, 221, 1);
+  color: rgba(204, 51, 99, 1);
+  /*border-radius: 1Vw;*/
+  padding-top: 0.7Vw;
+  padding-bottom: 2Vw;
 }
 
-.songfi22{
-  position: absolute;
-  /*height: 32Vw;*/
-  height: 10Vw;
-  width: 15.1%;
-  top: 28%;
-  left: 34.97Vw;
-  /*margin-left: 50%;*/
-  transform: translate(-50%, -50%);
+.tab:hover{
+  background: rgb(202, 174, 184);
+  color: rgb(109, 105, 106);
+}
+
+.active-tab{
+  border: none;
+  color: aliceblue;
   background-color: rgba(204, 51, 99, 1);
-  border-radius: 2Vw;
 }
 
-.songfi2:hover{
-  position: absolute;
-  /*height: 32Vw;*/
-  height: 10Vw;
-  width: 15.1%;
-  top: 28%;
-  left: 34.97Vw;
-  /*margin-left: 50%;*/
-  transform: translate(-50%, -50%);
-  background-color: rgb(145, 124, 130);
-  border-radius: 2Vw;
-}
-
-.songfi3{
-  position: absolute;
-  /*height: 32Vw;*/
-  height: 10Vw;
-  width: 15.1%;
-  top: 28%;
-  left: 51.1Vw;
-  /*margin-left: 50%;*/
-  transform: translate(-50%, -50%);
-  background-color: rgb(238, 192, 206);
-  border-radius: 2Vw;
-}
-
-.songfi3:hover{
-  position: absolute;
-  /*height: 32Vw;*/
-  height: 10Vw;
-  width: 15.1%;
-  top: 28%;
-  left: 51.1Vw;
-  /*margin-left: 50%;*/
-  transform: translate(-50%, -50%);
-  background-color: rgb(145, 124, 130);
-  border-radius: 2Vw;
-}
-
-.songfi33{
-  position: absolute;
-  /*height: 32Vw;*/
-  height: 10Vw;
-  width: 15.1%;
-  top: 28%;
-  left: 51.1Vw;
-  /*margin-left: 50%;*/
-  transform: translate(-50%, -50%);
-  background-color: rgba(204, 51, 99, 1);
-  border-radius: 2Vw;
-}
-
-.songfi4{
-  position: absolute;
-  /*height: 32Vw;*/
-  height: 10Vw;
-  width: 15.1%;
-  top: 28%;
-  left: 67.25Vw;
-  /*margin-left: 50%;*/
-  transform: translate(-50%, -50%);
-  background-color: rgb(238, 192, 206);
-  border-radius: 2Vw;
-}
-
-.songfi4:hover{
-  position: absolute;
-  /*height: 32Vw;*/
-  height: 10Vw;
-  width: 15.1%;
-  top: 28%;
-  left: 67.25Vw;
-  /*margin-left: 50%;*/
-  transform: translate(-50%, -50%);
-  background-color: rgb(145, 124, 130);
-  border-radius: 2Vw;
-}
-
-.songfi44{
-  position: absolute;
-  /*height: 32Vw;*/
-  height: 10Vw;
-  width: 15.1%;
-  top: 28%;
-  left: 67.25Vw;
-  /*margin-left: 50%;*/
-  transform: translate(-50%, -50%);
-  background-color: rgba(204, 51, 99, 1);
-  border-radius: 2Vw;
-}
-
-.songfi5{
-  position: absolute;
-  /*height: 32Vw;*/
-  height: 10Vw;
-  width: 15.1%;
-  top: 28%;
-  left: 83.4Vw;
-  /*margin-left: 50%;*/
-  transform: translate(-50%, -50%);
-  background-color: rgb(238, 192, 206);
-  border-radius: 2Vw;
-}
-
-.songfi5:hover{
-  position: absolute;
-  /*height: 32Vw;*/
-  height: 10Vw;
-  width: 15.1%;
-  top: 28%;
-  left: 83.4Vw;
-  /*margin-left: 50%;*/
-  transform: translate(-50%, -50%);
-  background-color: rgb(145, 124, 130);
-  border-radius: 2Vw;
-}
-
-.songfi55{
-  position: absolute;
-  /*height: 32Vw;*/
-  height: 10Vw;
-  width: 15.1%;
-  top: 28%;
-  left: 83.4Vw;
-  /*margin-left: 50%;*/
-  transform: translate(-50%, -50%);
-  background-color: rgba(204, 51, 99, 1);
-  border-radius: 2Vw;
-}
-
-.songall{
+.contents{
   position: relative;
-  font-size: 3Vw;
-  font-weight: 400;
-  color: rgba(253, 207, 221, 1);
-  margin-bottom: 3.5Vw;
 }
 
-.songall2{
+.content{
+  display: none;
   position: relative;
-  font-size: 3Vw;
-  font-weight: 400;
-  color: rgb(99, 88, 91);
-  margin-bottom: 3.5Vw;
 }
 
-.songth{
-  position: relative;
-  font-size: 3Vw;
-  font-weight: 400;
-  color: rgb(99, 88, 91);
-  margin-bottom: 3.5Vw;
-}
-
-.songth2{
-  position: relative;
-  font-size: 3Vw;
-  font-weight: 400;
-  color: rgba(253, 207, 221, 1);
-  margin-bottom: 3.5Vw;
-}
-
-.songeng{
-  position: relative;
-  font-size: 3Vw;
-  font-weight: 400;
-  color: rgb(99, 88, 91);
-  margin-bottom: 3.5Vw;
-}
-
-.songeng2{
-  position: relative;
-  font-size: 3Vw;
-  font-weight: 400;
-  color: rgba(253, 207, 221, 1);
-  margin-bottom: 3.5Vw;
-}
-
-.songjp{
-  position: relative;
-  font-size: 3Vw;
-  font-weight: 400;
-  color: rgb(99, 88, 91);
-  margin-bottom: 3.5Vw;
-}
-
-.songjp2{
-  position: relative;
-  font-size: 3Vw;
-  font-weight: 400;
-  color: rgba(253, 207, 221, 1);
-  margin-bottom: 3.5Vw;
-}
-
-.songkr{
-  position: relative;
-  font-size: 3Vw;
-  font-weight: 400;
-  color: rgb(99, 88, 91);
-  margin-bottom: 3.5Vw;
-}
-
-.songkr2{
-  position: relative;
-  font-size: 3Vw;
-  font-weight: 400;
-  color: rgba(253, 207, 221, 1);
-  margin-bottom: 3.5Vw;
+.active-content{
+  display: block;
+  transition: all 1s ease-in-out;
 }
 
 .mode-button {
