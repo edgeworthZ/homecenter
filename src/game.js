@@ -160,6 +160,7 @@ class Game extends React.Component {
 		};
 		
 		window.$isPlaying = false;
+		window.$touch = '2';
 		var speed = 0;
 		var combo = 0;
 		var maxCombo = 0;
@@ -546,12 +547,16 @@ class Game extends React.Component {
 
 		var getHitJudgement = function (accuracy) {
 		  if (accuracy < 0.1) {
+			window.$touch = '1';
 			return 'perfect';
 		  } else if (accuracy < 0.25) {
+			window.$touch = '1';
 			return 'good';
 		  } else if (accuracy < 0.3) {
+			window.$touch = '1';
 			return 'bad';
 		  } else {
+			window.$touch = '0';
 			return 'miss';
 		  }
 		};
@@ -693,10 +698,20 @@ class Game extends React.Component {
 		  try {
 			console.log(44);
 			const port = await navigator.serial.requestPort();
-			await port.open({ baudRate: 115200  });
+			await port.open({ baudRate: 9600  });
 			console.log(55);
+			
+			/*const writer = port.writable.getWriter();
+			const data = new Uint8Array([104, 101, 108, 108, 111]); // hello*/
+			
+			const textEncoder = new window.TextEncoderStream();
+			const writableStreamClosed = textEncoder.readable.pipeTo(port.writable);
+			const writer = textEncoder.writable.getWriter();
+			
+			
 			const decoder = new window.TextDecoderStream();
 			
+
 			port.readable.pipeTo(decoder.writable);
 
 			const inputStream = decoder.readable;
@@ -706,6 +721,14 @@ class Game extends React.Component {
 			document.querySelector('.cr').style.display = 'block';
 
 			while (true) {
+				//await writer.write(data);
+				if(window.$touch === '1' || window.$touch === '0'){
+					await writer.write(window.$touch);
+					window.$touch = '2';
+				}else{
+					// user doesn't touch
+					await writer.write('2');
+				}
 			  const { value, done } = await reader.read();
 			  if (value) {
 				//log.textContent += value + '\n';
@@ -723,6 +746,7 @@ class Game extends React.Component {
 			  if (done) {
 				console.log('[readLoop] DONE', done);
 				reader.releaseLock();
+				writer.releaseLock();
 				break;
 			  }
 			}
@@ -737,7 +761,11 @@ class Game extends React.Component {
 			
 		  try {
 			const port = await navigator.serial.requestPort();
-			await port.open({ baudRate: 115200  });
+			await port.open({ baudRate: 9600  });
+			
+			const textEncoder = new window.TextEncoderStream();
+			const writableStreamClosed = textEncoder.readable.pipeTo(port.writable);
+			const writer = textEncoder.writable.getWriter();
 			
 			const decoder = new window.TextDecoderStream();
 			
@@ -750,6 +778,15 @@ class Game extends React.Component {
 			document.querySelector('.cl').style.display = 'block';
 
 			while (true) {
+				//await writer.write(data);
+				if(window.$touch === '1' || window.$touch === '0'){
+					await writer.write(window.$touch);
+					window.$touch = '2';
+				}else{
+					// user doesn't touch
+					await writer.write('2');
+				}
+				
 			  const { value, done } = await reader.read();
 			  if (value) {
 				//log.textContent += value + '\n';
