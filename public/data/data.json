@@ -44,7 +44,9 @@
 	  ]
 	},
 	"song" : {
-	  "duration": 56,
+	  "duration": 3,
+	  "name": "Your Name OST - Kataware Doki",
+	  "owner": "Yojiro Noda",
 	  "sheet": ["s", "l"],
 	  "lyrics": [
 		{ "upperText": "I want to be your friend.I want to be your friend.", "lowerText": "I won't leave you.", "delay": 1.0 },
@@ -63,7 +65,7 @@
 	}
 },
 {
-	  "s" :{
+	  "s" : {
 	  "color": "rgba(28, 121, 228, 1)",
 	  "next": 0,
 	  "notes": [
@@ -76,10 +78,20 @@
 		{ "duration": 3, "delay": 43.5 },
 		{ "duration": 3, "delay": 47.4 },
 		{ "duration": 3, "delay": 49.5 },
-		{ "duration": 3, "delay": 52 }
+		{ "duration": 3, "delay": 52 },
+		{ "duration": 3, "delay": 55 },
+		{ "duration": 3, "delay": 59.5 },
+		{ "duration": 3, "delay": 62 },
+		{ "duration": 3, "delay": 64.1 },
+		{ "duration": 3, "delay": 68 },
+		{ "duration": 3, "delay": 71 },
+		{ "duration": 3, "delay": 73.5 },
+		{ "duration": 3, "delay": 76 },
+		{ "duration": 3, "delay": 80 },
+		{ "duration": 3, "delay": 82.3 }
 	  ]
 	},
-	
+
 	"l" : {
 	  "color": "rgba(28, 121, 228, 1)",
 	  "next": 0,
@@ -104,15 +116,45 @@
 		{ "duration": 3, "delay": 43.5 },
 		{ "duration": 3, "delay": 47.4 },
 		{ "duration": 3, "delay": 49.5 },
-		{ "duration": 3, "delay": 52 }
+		{ "duration": 3, "delay": 52 },
+		{ "duration": 3, "delay": 53.1 },
+		{ "duration": 3, "delay": 54.2 },
+		{ "duration": 3, "delay": 55.3 },
+		{ "duration": 3, "delay": 56.4 },
+		{ "duration": 3, "delay": 59 },
+		{ "duration": 3, "delay": 62 },
+		{ "duration": 3, "delay": 63.5 },
+		{ "duration": 3, "delay": 65 },
+		{ "duration": 3, "delay": 67.1 },
+		{ "duration": 3, "delay": 69.3 },
+		{ "duration": 3, "delay": 71.8 },
+		{ "duration": 3, "delay": 72.9 },
+		{ "duration": 3, "delay": 75 },
+		{ "duration": 3, "delay": 77.2 },
+		{ "duration": 3, "delay": 78.6 },
+		{ "duration": 3, "delay": 80 },
+		{ "duration": 3, "delay": 82 },
+		{ "duration": 3, "delay": 84 }
 	  ]
 	},
+
 	"song" : {
-	  "duration": 6,
+	  "duration": 88,
+	  "name": "Demon Slayer OP2 - Zankyou Sanka",
+	  "owner": "Aimer",
 	  "sheet": ["s", "l"],
 	  "lyrics": [
-		{ "upperText": "I want to be your friend.", "lowerText": "I won't leave you.", "delay": 1.0 },
-		{ "upperText": "Because you're here with me.", "lowerText": "When I'm alone.", "delay": 3.0 }
+		 { "upperText": "...Intro...", "lowerText": "Kimetsu no Yaiba", "delay": 1.0 },
+		 { "upperText": "Dare ga sode ni saku genka", "lowerText": "Tada soko ni ai wo otoshita", "delay": 18.0 },
+		 { "upperText": "Hade ni iro wo tokasu you ni", "lowerText": "Ginshu no tsuki wo soete", "delay": 26.5 },
+		 { "upperText": "Korogaru you ni kaze wo kitte", "lowerText": "Tsumazuku goto ni tsuyoku natta", "delay": 31.5 },
+		 { "upperText": "Hikari mo itami mo ikari mo", "lowerText": "Zenbu dakishimete", "delay": 36.5 },
+		 { "upperText": "Erabarenakereba erabeba ii", "lowerText": "***", "delay": 41.0 },
+		 { "upperText": "Koe yo todoroke yoru no sono mukou e", "lowerText": "Namida de nijindeta", "delay": 47.0 },
+		 { "upperText": "Anna ni tooku no keshiki", "lowerText": "Made hibikiwatare", "delay": 53.5 },
+		 { "upperText": "Nani wo kanadete dare ni todoketakute", "lowerText": "Futashika na mama de ii", "delay": 59.5 },
+		 { "upperText": "Donna ni kurai kanjou mo", "lowerText": "Donna ni nagai kattou mo", "delay": 106.0 },
+		 { "upperText": "Uta to chire", "lowerText": "Zankyou!", "delay": 111.0 }
 	  ]
 	}
 }

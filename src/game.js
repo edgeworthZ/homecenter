@@ -43,14 +43,20 @@ class Game extends React.Component {
 		window.$game = window.location.pathname.split('/').pop();
 		window.$mode = window.location.pathname.split('/').pop()[1];
 		
-		var gameStart;
+		window.$gameStart = false;
+		
+		//var allowIntervalFunc = true;
 
 		var left;
 		var right;
 
 		var dataPath = "data/data.json";
-		var statusPath = "data/debug_status.json";
-		var messagePath = "http://localhost:3000";
+		var statusPath = "http://localhost:55555/status";
+		var scorePath = "http://localhost:55555/score";
+		var stopPath = "http://localhost:55555/status/stop";
+		var playPath = "http://localhost:55555/status/play";
+		var pausePath = "http://localhost:55555/status/pause";
+		var finishPath = "http://localhost:55555/status/finish";
 
 		fetch(dataPath,{
 			method: "GET",
@@ -66,6 +72,10 @@ class Game extends React.Component {
 				//console.log(data);
 				//s = data[songId].s;
 				//l = data[songId].l;
+				
+				document.querySelector('.song__name').innerHTML = data[songId].song.name;
+				document.querySelector('.song__owner').innerHTML = data[songId].song.owner;
+				document.querySelector('.game-img').src = "img/si"+songId+".jpg";
 				myKeys['s'] = data[songId].s;
 				myKeys['l'] = data[songId].l;
 				song = data[songId].song;
@@ -82,25 +92,33 @@ class Game extends React.Component {
 					"Access-Control-Allow-Origin": "*",
 					"Access-Control-Allow-Methods": "*",
 					"Access-Control-Allow-Credentials": true,
+					'Host': 'https://*.airtableblocks.com',
 					"Content-Type": "application/json"
 				},
 			})
 				.then(response => response.json())
-				.then((data) => {
-					//console.log(data);
-					if(!gameStart) return;
-					
-					if(data.isPlaying && !window.$isPlaying){
-						document.querySelector('.play__button').style.display = 'none';
-						document.querySelector('.pause__button').style.display = 'block';
+				.then((datas) => {
+					var data = datas[0];
+					console.log(data);
+					//console.log(data.isPlaying);
+					//if(!window.$gameStart || !allowIntervalFunc) return;
+					if(!window.$gameStart) return;
+					console.log(77);
+					if(data.isPlaying === 1 && !window.$isPlaying ){	
+						//document.querySelector('.play__button').style.display = 'none';
+						//document.querySelector('.pause__button').style.display = 'block';
 						Play();
-					}else if(!data.isPlaying && window.$isPlaying){
-						document.querySelector('.play__button').style.display = 'block';
-						document.querySelector('.pause__button').style.display = 'none';
+					}else if(data.isPlaying === 0 && window.$isPlaying){
+						//document.querySelector('.play__button').style.display = 'block';
+						//document.querySelector('.pause__button').style.display = 'none';
 						Pause();
 					}
+					
+					//console.log(data.isStopping);
 
-					if(data.isStopping){ // go to home page
+					if(data.isStopping === 1){ // go to home page
+						// switch to not stop
+						TriggerBackendStop();;
 						window.location.href = "home";
 					}
 				}).catch((error) => {
@@ -111,20 +129,16 @@ class Game extends React.Component {
 			
 			return false;
 		}
-
-		function SendScore(score){
-			var message = {};
-			message['score'] = score;
-			
-			fetch(messagePath,{
+		
+		function TriggerBackendStop(){
+			fetch(stopPath,{
 				method: "POST",
 				headers: {
 					"Access-Control-Allow-Origin": "*",
 					"Access-Control-Allow-Methods": "*",
 					"Access-Control-Allow-Credentials": true,
 					"Content-Type": "application/json"
-				},
-				body: JSON.stringify(message),
+				}
 			})
 				.then(response =>  {
 					console.log(response);
@@ -134,11 +148,104 @@ class Game extends React.Component {
 					//this.setState({ redirect: "/landing" });
 				});
 		}
+		
+		function TriggerBackendPlay(){
+			fetch(playPath,{
+				method: "POST",
+				headers: {
+					"Access-Control-Allow-Origin": "*",
+					"Access-Control-Allow-Methods": "*",
+					"Access-Control-Allow-Credentials": true,
+					"Content-Type": "application/json"
+				}
+			})
+				.then(response =>  {
+					console.log(response);
+				})
+				.catch((error) => {
+					console.log('add Error!');
+					//this.setState({ redirect: "/landing" });
+				});
+		}
+		
+		function TriggerBackendPause(){
+			fetch(pausePath,{
+				method: "POST",
+				headers: {
+					"Access-Control-Allow-Origin": "*",
+					"Access-Control-Allow-Methods": "*",
+					"Access-Control-Allow-Credentials": true,
+					"Content-Type": "application/json"
+				}
+			})
+				.then(response =>  {
+					console.log(response);		
+				})
+				.catch((error) => {
+					console.log('add Error!');
+					//this.setState({ redirect: "/landing" });
+				});
+		}
 
-		setInterval(function () {
-		   GetHardwareStatus();
+		function SendScore(score){
+			var message = {};
+			message['Score'] = score;
+			
+			fetch(scorePath,{
+				method: "POST",
+				headers: {
+					"Access-Control-Allow-Origin": "*",
+					"Access-Control-Allow-Methods": "*",
+					"Access-Control-Allow-Credentials": true,
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(message),
+			})
+				.then(response => response.json())
+				.then((data) => {
+					//console.log(data.Mention);
+					var congrat = document.querySelector('.result__heading');
+					congrat.innerHTML = data.Mention;
+					
+				}).catch((error) => {
+					console.log(error);
+					//this.setState({ redirect: "/landing" });
+				});
+		}
+		
+		function SendFinish(val){
+			var message = {};
+			message['isFinished'] = val;
+			
+			fetch(finishPath,{
+				method: "POST",
+				headers: {
+					"Access-Control-Allow-Origin": "*",
+					"Access-Control-Allow-Methods": "*",
+					"Access-Control-Allow-Credentials": true,
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(message),
+			})
+				.then(response => response.json())
+				.then((data) => {
+					console.log(data);
+					//var congrat = document.querySelector('.result__heading');
+					//congrat.innerHTML = data.Mention;
+					
+				}).catch((error) => {
+					console.log(error);
+					//this.setState({ redirect: "/landing" });
+				});
+		}
+
+		SendFinish(0);
+		
+		window.$statusInterval = setInterval(function () {
+		   //if(allowIntervalFunc)
+			GetHardwareStatus();
 		   //console.log(top.serial);
-		  }, 200);
+		  }, 100);
 		  
 		/*var mydata = JSON.parse(data);
 		alert(mydata[0].song.duration);
@@ -307,7 +414,9 @@ class Game extends React.Component {
 		var setupStartButton = function () {
 		  var startButton = document.querySelector('.btn--start');
 		  startButton.addEventListener('click', function () {
+			document.querySelector('.summary__status').style.opacity = 1;
 			window.$isPlaying = true;
+			TriggerBackendPlay();
 			startTime = Date.now();
 
 			startTimer = prTimer(song.duration+1, "timer", function() { 
@@ -317,11 +426,12 @@ class Game extends React.Component {
 			
 			document.querySelector('.menu').style.opacity = 0;
 			document.querySelector('.game').style.opacity = 1;
-			document.querySelector('.play__button').style.opacity = 1;
-			document.querySelector('.pause__button').style.opacity = 1;
+			//document.querySelector('.play__button').style.opacity = 1;
+			//document.querySelector('.pause__button').style.opacity = 1;
+			document.querySelector('.song').src = "media/"+window.location.pathname.split('/').pop()[2]+".mp3";
 			document.querySelector('.song').play();
 			document.querySelector('.menu').style.zIndex = -100;
-			gameStart = true;
+			window.$gameStart = true;
 			/*var audio = new Audio("media/music.mp3");
 			audio.play();*/
 			document.querySelectorAll('.note').forEach(function (note) {
@@ -331,6 +441,7 @@ class Game extends React.Component {
 		};
 
 		var display = document.querySelector('.summary__timer');
+		
 
 		function prTimer(seconds, container, oncomplete) {
 			display.style.display = 'block';
@@ -389,6 +500,8 @@ class Game extends React.Component {
 		};*/
 
 		var showResult = function () {
+		  window.$gameStart = false;
+		  SendFinish(1);
 		  SendScore(score);
 		  document.querySelector('.perfect__count').innerHTML = hits.perfect;
 		  document.querySelector('.good__count').innerHTML = hits.good;
@@ -398,8 +511,9 @@ class Game extends React.Component {
 		  document.querySelector('.score__count').innerHTML = score;
 		  document.querySelector('.game').style.opacity = 0;
 		  document.querySelector('.summary__timer').style.opacity = 0;
-		  document.querySelector('.play__button').style.opacity = 0;
-		  document.querySelector('.pause__button').style.opacity = 0;
+		  document.querySelector('.summary__status').style.opacity = 0;
+		  //document.querySelector('.play__button').style.opacity = 0;
+		  //document.querySelector('.pause__button').style.opacity = 0;
 		  document.querySelector('.summary__result').style.opacity = 1;
 		  document.querySelector('.summary').style.zIndex = 1;
 		};
@@ -467,6 +581,7 @@ class Game extends React.Component {
 		
 		function Pause(){
 			window.$isPlaying = false;
+			document.querySelector('.summary__status').innerHTML = "Paused...";
 			
 			document.querySelector('.song').pause();
 			//timer.pause();
@@ -485,6 +600,7 @@ class Game extends React.Component {
 		
 		function Play(){
 			window.$isPlaying = true;
+			document.querySelector('.summary__status').innerHTML = "Now Playing...";
 
 			document.querySelector('.song').play();
 			//timer.resume();
@@ -510,11 +626,11 @@ class Game extends React.Component {
 			return 1;
 		  }
 		  
-		  if ( key === 'g' && window.$isPlaying) {
+		  /*if ( key === 'g' && window.$isPlaying) {
 			Pause();
 		  }else if ( key === 'h' && !window.$isPlaying) {
 			Play();
-		  }
+		  }*/
 		};
 
 		window.$judge = function (index) {
@@ -652,16 +768,22 @@ class Game extends React.Component {
 		
 		/*document.querySelector('.play__button').addEventListener('click', () => {
 		  //console.log(888);
+		  allowIntervalFunc = false;
 		  document.querySelector('.play__button').style.display = 'none';
 		  document.querySelector('.pause__button').style.display = 'block';
-		  Play();
+		  Play();		  
+		  TriggerBackendPlay();
+		  setTimeout(function () {allowIntervalFunc = true;}, 1000);
 		});
 		
 		document.querySelector('.pause__button').addEventListener('click', () => {
 		  //console.log(888);
+		  allowIntervalFunc = false;
 		  document.querySelector('.play__button').style.display = 'block';
 		  document.querySelector('.pause__button').style.display = 'none';
 		  Pause();
+		  TriggerBackendPause();
+		  setTimeout(function () {allowIntervalFunc = true;}, 1000);
 		});*/
 
 		/* back && next navigation */
@@ -820,6 +942,7 @@ class Game extends React.Component {
 	
 	componentWillUnmount() { 
 	   window.removeEventListener('load', this.handleLoad);
+	   clearInterval(window.$statusInterval);
 	   window.$isPlaying = false;
 	   //document.body.removeChild(this.scr);
 	}
@@ -833,7 +956,7 @@ class Game extends React.Component {
 		  <div className="Game">
 			<div id="target"></div>
 
-			<audio className="song" crossOrigin="anonymous" src="media/music.mp3"></audio>
+			<audio className="song" crossOrigin="anonymous" src="media/0.mp3"></audio>
 
 			<main>
 			  <div className="game">
@@ -871,9 +994,9 @@ class Game extends React.Component {
 
 			  <div className="menu">
 				<div className="menu__song">
-				  <h2>Your Name OST - Kataware Doki</h2>
+				  <h2 className="song__name">Your Name OST - Kataware Doki</h2>
 				  <div>
-					<p>Original song composed by <span>Yojiro Noda</span></p>
+					<p className="song__owner">Original song composed by <span>Yojiro Noda</span></p>
 				  </div>
 				</div>
 				
@@ -919,14 +1042,12 @@ class Game extends React.Component {
 
 				
 			  </div>
-
-			  <img className="play__button" src="/img/buttonP.png" />
-			  <img className="pause__button" src="/img/buttonS.png" />
 			  
 			  <div className="summary">
+				 <div className="summary__status">Now Playing...</div>
 				<div className="summary__timer"></div>
 				<div className="summary__result">
-				  <h2 className="result__heading">You did great!!!</h2>
+				  <h2 className="result__heading">...</h2>
 				  <div className="result__accuracy perfect">
 					<p className="accuracy__heading">Perfect</p>
 					<span>:</span>

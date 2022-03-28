@@ -137,55 +137,66 @@ img {
   top: 60%;
 }
 
-.song_bg{
-  position: relative;
-  height: 32Vw;
-  /*height: auto;*/
-  width: 100%;
-  /*margin-left: 50%;*/
-  background-color: rgba(204, 51, 99, 1);
-  overflow: scroll;
-  /*padding-top: 20%;*/
+.song_bg {
+    /* position: relative; */
+    height: 100%;
+    /* height: auto; */
+    width: 100%;
+    /* margin-left: 50%; */
+    background-color: rgba(204, 51, 99, 1);
+    overflow-y: scroll;
+    /* padding-top: 20%; */
 }
 
-.song_rol{
-  position: relative;
-  height: 8Vw;
-  width: 100%;
-  left: 50%;
-  top: 4Vw;
-  transform: translate(-50%, -50%);
-  background-color: rgba(253, 207, 221, 1);
-  overflow: hidden;
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+.song_rol {
+    position: relative;
+    height: 25%;
+    width: 100%;
+    /* left: 50%; */
+    /* top: 4Vw; */
+    /* transform: translate(-50%, -50%); */
+    background-color: rgba(253, 207, 221, 1);
 }
 
 .picofsong {
-  position: absolute;
-  border-radius: 10Vw;
-  height: 6.5Vw;
-  width: 6.5Vw;
-  margin-top: 0.8Vw;
-  margin-left: 2Vw;
-  overflow: hidden;
+    position: absolute;
+    border-radius: 10Vw;
+    height: 128px;
+    top: 50%;
+    left: 7.5%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    /* margin-top: 0.8Vw; */
+    /* margin-left: 2Vw; */
+    overflow: hidden;
 }
 
-.songname{
-  position: absolute;
-  margin-left: 11Vw;
-  margin-top: 1.5Vw;
-  font-size: 2.5Vw;
-  font-weight: 400;
+.songname {
+    position: absolute;
+    top: 12%;
+    left: 15%;
+    /* margin-left: 11Vw; */
+    /* margin-top: 1.5Vw; */
+    font-size: 36px;
+    font-weight: 400;
 }
 
-.singername{
-  position: absolute;
-  margin-left: 10.5Vw;
-  margin-top: 3.8Vw;
-  font-size: 1.8Vw;
-  font-weight: 400;
-  color: #666;
+.singername {
+    position: absolute;
+    top: 43%;
+    left: 15%;
+    /* margin-left: 0; */
+    /* margin-top: 0; */
+    padding: 0 0 0 0;
+    font-size: 28px;
+    font-weight: 400;
+    color: #666;
 }
-
 /*.songfi{
   position: absolute;
   height: 10Vw;
@@ -197,33 +208,49 @@ img {
   border-radius: 2Vw;
 }*/
 
-.box{
-  width: 90%;
-  margin-top: 7.5%;
-  margin-left: 5%;
+.box {
+    margin: auto;
+    width: 90%;
+    height: 75%;
+    /* margin-top: 7.5%; */
+    /* margin-left: 5%; */
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*background: red;*/
 }
 
 .tabs{
   display: flex;
   justify-content: space-between;
-  width: 50Vw;
+  width: 60%;
   height: auto;
 }
 
-.tab{
-  flex: 1;
+.vertical-center {
+  /*margin: 0;*/
   text-align: center;
-  font-size: 3Vw;
-  font-weight: 400;
-  cursor: pointer;
-  position: relative;
-  width: 30Vw;
-  height: 4.5Vw;
-  background: rgba(253, 207, 221, 1);
-  color: rgba(204, 51, 99, 1);
-  /*border-radius: 1Vw;*/
-  padding-top: 0.7Vw;
-  padding-bottom: 2Vw;
+  /*position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);*/
+}
+
+.tab {
+	flex: 1 1;
+	font-size: 36px;
+	font-weight: 400;
+	cursor: pointer;
+	position: relative;
+	width: 60%;
+	/* height: 25%; */
+	padding: 1% 0 1% 0;
+	background: rgba(253, 207, 221, 1);
+	color: rgba(204, 51, 99, 1);
+	/* border-radius: 1Vw; */
+	/* padding-top: 0.7Vw; */
+	/* padding-bottom: 2Vw; */
 }
 
 .tab:hover{
@@ -239,16 +266,25 @@ img {
 
 .contents{
   position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .content{
   display: none;
   position: relative;
+    overflow: hidden;
+}
+
+.song_pic_container {
+    width: 10%;
+    /* position: relative; */
 }
 
 .active-content{
   display: block;
   transition: all 1s ease-in-out;
+  height: 100%;
 }
 
 .mode-button {
@@ -668,6 +704,17 @@ img {
   -webkit-transition:.5s;
   transition:.5s;
   transform: scale(1.02);*/
+}
+
+.summary__status{
+  position: absolute;
+  top: 3.5%;
+  left: 85.5%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  font-size: 3rem;
+  opacity:0;
+  transition: all 1s;
 }
 
 .summary__timer {
