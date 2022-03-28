@@ -679,7 +679,6 @@ class Game extends React.Component {
 			window.$touch = '1';
 			return 'bad';
 		  } else {
-			window.$touch = '0';
 			return 'miss';
 		  }
 		};
@@ -706,6 +705,7 @@ class Game extends React.Component {
 
 		var updateCombo = function (judgement) {
 		  if (judgement === 'bad' || judgement === 'miss') {
+			window.$touch = '0';
 			combo = 0;
 			comboText.innerHTML = '';
 		  } else {

@@ -153,8 +153,8 @@
 		 { "upperText": "Koe yo todoroke yoru no sono mukou e", "lowerText": "Namida de nijindeta", "delay": 47.0 },
 		 { "upperText": "Anna ni tooku no keshiki", "lowerText": "Made hibikiwatare", "delay": 53.5 },
 		 { "upperText": "Nani wo kanadete dare ni todoketakute", "lowerText": "Futashika na mama de ii", "delay": 59.5 },
-		 { "upperText": "Donna ni kurai kanjou mo", "lowerText": "Donna ni nagai kattou mo", "delay": 106.0 },
-		 { "upperText": "Uta to chire", "lowerText": "Zankyou!", "delay": 111.0 }
+		 { "upperText": "Donna ni kurai kanjou mo", "lowerText": "Donna ni nagai kattou mo", "delay": 65.5 },
+		 { "upperText": "Uta to chire", "lowerText": "Zankyou!", "delay": 71.0 }
 	  ]
 	}
 }
