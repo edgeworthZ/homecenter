@@ -83,7 +83,7 @@ function Songcompo(props) {
 							<div className='song_bg'>
 								<div className='song_rol'>
 									<div className="song_pic_container">
-										<img className='picofsong' src="/img/si00.jpg"></img>
+										<img className='picofsong' src="/img/si0.jpg"></img>
 									</div>
 									<h1 className='songname'>YOUR NAME OST - KATAWARE DOKI</h1>
 									<h2 className='singername'>Yojiro Noda</h2>
