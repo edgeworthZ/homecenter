@@ -68,6 +68,16 @@ function Songcompo(props) {
 								</div>
 								<div className='song_rol'>
 									<div className="song_pic_container">
+										<img className='picofsong' src="/img/si2.jpg"></img>
+									</div>
+									<h1 className='songname'>I Don’t Want to be Lonely Anymore (Call Me)</h1>
+									<h2 className='singername'>Ink Waruntorn feat.MEYOU</h2>
+									<div className="song__buttons" onClick={() => play(2)}>
+										<img className="mode-button aaa" src="/img/buttonStart.png" alt="my image" />
+									</div>
+								</div>
+								<div className='song_rol'>
+									<div className="song_pic_container">
 										<img className='picofsong' src="/img/si1.jpg"></img>
 									</div>
 									<h1 className='songname'>Say So</h1>
@@ -81,7 +91,16 @@ function Songcompo(props) {
 
 						<div className={`${state === 2 ? 'content active-content' : 'content'}`}>
 							<div className='song_bg'>
-
+								<div className='song_rol'>
+									<div className="song_pic_container">
+										<img className='picofsong' src="/img/si2.jpg"></img>
+									</div>
+									<h1 className='songname'>I Don’t Want to be Lonely Anymore (Call Me)</h1>
+									<h2 className='singername'>Ink Waruntorn feat.MEYOU</h2>
+									<div className="song__buttons" onClick={() => play(2)}>
+										<img className="mode-button aaa" src="/img/buttonStart.png" alt="my image" />
+									</div>
+								</div>
 							</div>
 						</div>
 
