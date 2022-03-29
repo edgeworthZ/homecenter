@@ -89,9 +89,12 @@ class Game extends React.Component {
 				//console.log(data);
 				//s = data[songId].s;
 				//l = data[songId].l;
+				var themeColor = data[songId].s.color;
 				SendSongName(data[songId].song.name);
 				document.querySelector('.song__name').innerHTML = data[songId].song.name;
 				document.querySelector('.song__owner').innerHTML = data[songId].song.owner;
+				document.documentElement.style.setProperty('--key-blue', themeColor);
+				document.documentElement.style.setProperty('--keypress-blue', 'linear-gradient(to top,'+themeColor.replace('1)','.6)')+','+themeColor.replace('1)','0)')+')');
 				document.querySelector('.game-img').src = "img/si"+songId+".jpg";
 				myKeys['s'] = data[songId].s;
 				myKeys['l'] = data[songId].l;
