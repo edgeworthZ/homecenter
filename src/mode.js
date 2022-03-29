@@ -9,6 +9,7 @@ class Mode extends React.Component {
 		this.modeA = this.modeA.bind(this);
 		this.modeB = this.modeB.bind(this);
 		this.modeC = this.modeC.bind(this);
+		this.back = this.back.bind(this);
 		this.state = {
 			render: false //Set render state to false
 		}
@@ -38,10 +39,17 @@ class Mode extends React.Component {
 		console.log("YEAH! Mode!");
 	}
 	
+	 back(){
+		//this.props.history.goBack();
+		this.props.history.push('/');
+	 }
+	
 	render (){
 		return (
 		  <div className="Mode">
 			<main>
+				<img className="back__button" src="/img/buttonB.png" alt="my image" onClick={this.back} />
+				
 				<div className="mode-bg">
 					<img src="/img/m00.png" />
 					

@@ -161,6 +161,11 @@ img {
     /* top: 4Vw; */
     /* transform: translate(-50%, -50%); */
     background-color: rgba(253, 207, 221, 1);
+	transition: .2s;
+}
+
+.song_rol:hover{
+	background-color: rgba(253, 156, 183, 1);
 }
 
 .picofsong {
@@ -254,14 +259,15 @@ img {
 }
 
 .tab:hover{
-  background: rgb(202, 174, 184);
-  color: rgb(109, 105, 106);
+  /*background: rgb(202, 174, 184);
+  color: rgb(109, 105, 106);*/
+  background-color: rgba(253, 156, 183, 1);
 }
 
 .active-tab{
   border: none;
   color: aliceblue;
-  background-color: rgba(204, 51, 99, 1);
+  background-color: rgba(204, 51, 99, 1) !important;
 }
 
 .contents{
@@ -308,11 +314,16 @@ img {
 
 .speed__box{
 	display: flex;
+	justify-content: center;
 }
 
 .game-start-button {
   border: 2px solid var(--hit-color);
   border-radius: 50%;
+}
+
+.controller {
+	
 }
 
 .game {
@@ -387,7 +398,7 @@ img {
   font-size: 1.75vw;
   color: rgba(255, 255, 255, .8);
   opacity: 0;
-  transition: all 1s;
+  transition: all 0.5s;
 }
 
 .lyric__lower__text {
@@ -396,7 +407,7 @@ img {
   font-size: 1.75vw;
   color: rgba(255, 255, 255, .8);
   opacity: 0;
-  transition: all 1s;
+  transition: all 0.5s;
 }
 
 .hit {
@@ -670,6 +681,34 @@ img {
   color: white;
   text-align: center;
   z-index: -100;
+}
+
+.back__button {
+	/*cursor: pointer;*/
+	position: absolute;
+	top: 2%;
+    left: 1.5%;
+	width: 50px;
+	z-index: 101;
+	transition: .1s;
+}
+
+.back__button:hover{
+  -o-transition:.1s;
+  -ms-transition:.1s;
+  -moz-transition:.1s;
+  -webkit-transition:.1s;
+  transition:.1s;
+  transform: scale(1.1);
+}
+
+.back__button:active{
+  -o-transition:.1s;
+  -ms-transition:.1s;
+  -moz-transition:.1s;
+  -webkit-transition:.1s;
+  transition:.1s;
+  transform: scale(0.9);
 }
 
 .play__button {

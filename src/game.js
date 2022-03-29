@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import  { Redirect } from 'react-router-dom'
 import './Game.css';
+import { withRouter } from 'react-router-dom';
 
 class Game extends React.Component {
 	constructor(props) {
@@ -10,6 +11,7 @@ class Game extends React.Component {
 		this.handleButton1 = this.handleButton1.bind(this);
 		this.handleButton2 = this.handleButton2.bind(this);
 		this.handleButton3 = this.handleButton3.bind(this);
+		this.back = this.back.bind(this);
 		this.state = {
 			render: false //Set render state to false
 		}
@@ -30,6 +32,11 @@ class Game extends React.Component {
 		//window.location.reload(false);
 		//window.location.href = window.location.pathname;
 		this.props.history.push('/r');
+	 }
+	 
+	  back(){
+		//this.props.history.goBack();
+		this.props.history.push('/song-'+window.location.pathname.split('/').pop()[1]);
 	 }
 	
 	componentDidMount() {
@@ -59,6 +66,7 @@ class Game extends React.Component {
 		var finishPath = "http://localhost:55555/status/finish";*/
 		
 		var statusPath = "https://homecenter-backend.herokuapp.com/status";
+		var songNamePath = "https://homecenter-backend.herokuapp.com/status/songname";
 		var scorePath = "https://homecenter-backend.herokuapp.com/score";
 		var stopPath = "https://homecenter-backend.herokuapp.com/status/stop";
 		var playPath = "https://homecenter-backend.herokuapp.com/status/play";
@@ -79,7 +87,7 @@ class Game extends React.Component {
 				//console.log(data);
 				//s = data[songId].s;
 				//l = data[songId].l;
-				
+				SendSongName(data[songId].song.name);
 				document.querySelector('.song__name').innerHTML = data[songId].song.name;
 				document.querySelector('.song__owner').innerHTML = data[songId].song.owner;
 				document.querySelector('.game-img').src = "img/si"+songId+".jpg";
@@ -106,11 +114,11 @@ class Game extends React.Component {
 				.then(response => response.json())
 				.then((datas) => {
 					var data = datas[0];
-					console.log(data);
+					//console.log(data);
 					//console.log(data.isPlaying);
 					//if(!window.$gameStart || !allowIntervalFunc) return;
 					if(!window.$gameStart) return;
-					console.log(77);
+					//console.log(77);
 					if(data.isPlaying === 1 && !window.$isPlaying ){	
 						//document.querySelector('.play__button').style.display = 'none';
 						//document.querySelector('.pause__button').style.display = 'block';
@@ -245,7 +253,33 @@ class Game extends React.Component {
 					//this.setState({ redirect: "/landing" });
 				});
 		}
-
+		
+		function SendSongName(name){
+			var message = {};
+			message['SongName'] = name;
+			
+			fetch(songNamePath,{
+				method: "POST",
+				headers: {
+					"Access-Control-Allow-Origin": "*",
+					"Access-Control-Allow-Methods": "*",
+					"Access-Control-Allow-Credentials": true,
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(message),
+			})
+				.then(response => response.json())
+				.then((data) => {
+					console.log(data);
+					//var congrat = document.querySelector('.result__heading');
+					//congrat.innerHTML = data.Mention;
+					
+				}).catch((error) => {
+					console.log(error);
+					//this.setState({ redirect: "/landing" });
+				});
+		}
+		
 		SendFinish(0);
 		
 		window.$statusInterval = setInterval(function () {
@@ -330,7 +364,7 @@ class Game extends React.Component {
 					lyricLowerElement.textContent  = lyric.lowerText;
 					lyricUpperElement.style.opacity = 1;
 					lyricLowerElement.style.opacity = 1;
-				}, (lyric.delay * 1000) + 1000);
+				}, (lyric.delay * 1000) + 500);
 				
 				timers.push(timer1);
 				timers.push(timer2);
@@ -374,21 +408,21 @@ class Game extends React.Component {
 
 		  buttons.forEach(function (button) {
 			button.addEventListener('click', function () {
-			  if (this.innerHTML === '1x') {
+			  if (this.innerHTML === 'Lv1') {
 				buttons[0].className = 'btn btn--small btn--selected';
 				buttons[1].className = 'btn btn--small';
 				buttons[2].className = 'btn btn--small';
-				speed = parseInt(this.innerHTML) - 1;
-			  } else if (this.innerHTML === '2x') {
+				speed = 0;
+			  } else if (this.innerHTML === 'Lv2') {
 				buttons[0].className = 'btn btn--small';
 				buttons[1].className = 'btn btn--small btn--selected';
 				buttons[2].className = 'btn btn--small';
-				speed = parseInt(this.innerHTML) - 1;
-			  } else if (this.innerHTML === '3x') {
+				speed = 0.3;
+			  } else if (this.innerHTML === 'Lv3') {
 				buttons[0].className = 'btn btn--small';
 				buttons[1].className = 'btn btn--small';
 				buttons[2].className = 'btn btn--small btn--selected';
-				speed = parseInt(this.innerHTML) - 1;
+				speed = 0.5;
 			  }
 
 			  initializeNotes();
@@ -423,6 +457,12 @@ class Game extends React.Component {
 		  startButton.addEventListener('click', function () {
 			document.querySelector('.summary__status').style.opacity = 1;
 			window.$isPlaying = true;
+			
+			var uParam = window.location.pathname.split('/').pop();
+			  //console.log(uParam);
+			if(uParam[1] == 'a' || uParam[1] == 'b'){
+				initializeLyrics();
+			}
 			TriggerBackendPlay();
 			startTime = Date.now();
 
@@ -473,7 +513,7 @@ class Game extends React.Component {
 				if( now == 0) {
 					clearInterval(timer);
 					obj.resume = function() {};
-					if( oncomplete) oncomplete();
+					if( oncomplete && window.$isPlaying) oncomplete();
 				}
 				return now;
 			};
@@ -747,14 +787,13 @@ class Game extends React.Component {
 		  //console.log(uParam);
 
 		  if(uParam[1] == 'a'){ // sing
+		    document.querySelector('.controller').style.display = 'none';
 			document.querySelector('.config__speed').style.display = 'none';
-			document.querySelector('.menu_start_s').style.opacity = 1;
-			initializeLyrics();
+			document.querySelector('.menu_start_s').style.opacity = 1;		
 			setupStartButton();
 		  }else if(uParam[1] == 'b'){ // sing & dance
 		    document.querySelector('.config__speed').style.opacity = 1;
 			document.querySelector('.menu_start_s').style.opacity = 1;
-			initializeLyrics();
 			initializeNotes();
 			setupSpeed();
 			setupStartButton();
@@ -804,7 +843,7 @@ class Game extends React.Component {
 		}
 
 		document.getElementById('connectButtonL').addEventListener('click', () => {
-		  console.log(888);
+		  //console.log(888);
 		  if (navigator.serial) {
 			connectSerialL();
 		  } else {
@@ -813,7 +852,7 @@ class Game extends React.Component {
 		});
 
 		document.getElementById('connectButtonR').addEventListener('click', () => {
-			  console.log(444);
+			  //console.log(444);
 		  if (navigator.serial) {
 			connectSerialR();
 		  } else {
@@ -949,8 +988,9 @@ class Game extends React.Component {
 	
 	componentWillUnmount() { 
 	   window.removeEventListener('load', this.handleLoad);
-	   clearInterval(window.$statusInterval);
 	   window.$isPlaying = false;
+	   window.$gameStart = false;
+	   clearInterval(window.$statusInterval);
 	   //document.body.removeChild(this.scr);
 	}
 	
@@ -966,6 +1006,9 @@ class Game extends React.Component {
 			<audio className="song" crossOrigin="anonymous" src="media/0.mp3"></audio>
 
 			<main>
+			  <img className="back__button" src="/img/buttonB.png" alt="my image" onClick={this.back} />
+	
+			
 			  <div className="game">
 				 <div className="live__score">
 				  <div className="live__score__text">Score: 0</div>
@@ -1013,7 +1056,7 @@ class Game extends React.Component {
 				    </div>
 		
 				<div className="menu__config">
-				  <div className="menu_start">
+				  <div className="menu_start controller">
 					<h2>Left</h2>
 					<h2>Sensor</h2>
 					<div className="connect cl">
@@ -1021,7 +1064,7 @@ class Game extends React.Component {
 					</div>
 					<div className="btn btn--primary game-start-button cbl" id="connectButtonL" >Connect</div>
 				  </div>
-				  <div className="menu_start">
+				  <div className="menu_start controller">
 					<h2>Right</h2>
 					<h2>Sensor</h2>
 					<div className="connect cr">
@@ -1033,11 +1076,11 @@ class Game extends React.Component {
 
 				<div className="menu__config">
 				  <div className="config__speed">
-					<h2>Speed</h2>
+					<h2>DIFFICULTY</h2>
 					<div className="speed__box">
-					  <div className="btn btn--small btn--selected">1x</div>
-					  <div className="btn btn--small">2x</div>
-					  <div className="btn btn--small">3x</div>
+					  <div className="btn btn--small btn--selected">Lv1</div>
+					  <div className="btn btn--small">Lv2</div>
+					  <div className="btn btn--small">Lv3</div>
 					</div>
 				  </div>
 				  

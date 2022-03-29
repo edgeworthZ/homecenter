@@ -21,10 +21,17 @@ function Songcompo(props) {
            pathname: '/m'+window.location.pathname.slice(-1)+id
        });
 	}
+	
+	const back = () => {
+		 history.push({
+           pathname: '/mode'
+       });
+	}
 
 	return (
 		<div className="Song">
 			<main>
+				<img className="back__button" src="/img/buttonB.png" alt="my image" onClick={() => back()} />
 				<div className="mode-bg">
 					<img src="/img/s00.png" />
 									<div className="box">
@@ -53,20 +60,9 @@ function Songcompo(props) {
 									<div className="song_pic_container">
 										<img className='picofsong' src="/img/si0.jpg"></img>
 									</div>
-									<h1 className='songname'>YOUR NAME OST - KATAWARE DOKI</h1>
-									<h2 className='singername'>Yojiro Noda</h2>
-									<div className="song__buttons" onClick={() => play(0)}>
-										<img className="mode-button aaa" src="/img/buttonStart.png" alt="my image" />
-									</div>
-								</div>
-								
-								<div className='song_rol'>
-									<div className="song_pic_container">
-										<img className='picofsong' src="/img/si1.jpg"></img>
-									</div>
 									<h1 className='songname'>Demon Slayer OP2 - Zankyou Sanka</h1>
 									<h2 className='singername'>Aimer</h2>
-									<div className="song__buttons" onClick={() => play(1)}>
+									<div className="song__buttons" onClick={() => play(0)}>
 										<img className="mode-button aaa" src="/img/buttonStart.png" alt="my image" />
 									</div>
 								</div>
@@ -85,10 +81,10 @@ function Songcompo(props) {
 									<div className="song_pic_container">
 										<img className='picofsong' src="/img/si0.jpg"></img>
 									</div>
-									<h1 className='songname'>YOUR NAME OST - KATAWARE DOKI</h1>
-									<h2 className='singername'>Yojiro Noda</h2>
+									<h1 className='songname'>Demon Slayer OP2 - Zankyou Sanka</h1>
+									<h2 className='singername'>Aimer</h2>
 									<div className="song__buttons" onClick={() => play(0)}>
-										<img className="mode-button" src="/img/buttonStart.png" alt="my image" />
+										<img className="mode-button aaa" src="/img/buttonStart.png" alt="my image" />
 									</div>
 								</div>
 							</div>
