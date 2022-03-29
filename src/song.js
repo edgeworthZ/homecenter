@@ -66,6 +66,16 @@ function Songcompo(props) {
 										<img className="mode-button aaa" src="/img/buttonStart.png" alt="my image" />
 									</div>
 								</div>
+								<div className='song_rol'>
+									<div className="song_pic_container">
+										<img className='picofsong' src="/img/si1.jpg"></img>
+									</div>
+									<h1 className='songname'>Say So</h1>
+									<h2 className='singername'>Doja Cat</h2>
+									<div className="song__buttons" onClick={() => play(1)}>
+										<img className="mode-button aaa" src="/img/buttonStart.png" alt="my image" />
+									</div>
+								</div>
 							</div>
 						</div>
 
@@ -84,6 +94,16 @@ function Songcompo(props) {
 									<h1 className='songname'>Demon Slayer OP2 - Zankyou Sanka</h1>
 									<h2 className='singername'>Aimer</h2>
 									<div className="song__buttons" onClick={() => play(0)}>
+										<img className="mode-button aaa" src="/img/buttonStart.png" alt="my image" />
+									</div>
+								</div>
+								<div className='song_rol'>
+									<div className="song_pic_container">
+										<img className='picofsong' src="/img/si1.jpg"></img>
+									</div>
+									<h1 className='songname'>Say So</h1>
+									<h2 className='singername'>Doja Cat</h2>
+									<div className="song__buttons" onClick={() => play(1)}>
 										<img className="mode-button aaa" src="/img/buttonStart.png" alt="my image" />
 									</div>
 								</div>
