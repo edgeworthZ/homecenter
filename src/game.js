@@ -53,6 +53,8 @@ class Game extends React.Component {
 		window.$gameStart = false;
 		
 		//var allowIntervalFunc = true;
+		var video = document.getElementById("myVideo");
+		video.play();
 
 		var left;
 		var right;
@@ -413,16 +415,20 @@ class Game extends React.Component {
 				buttons[1].className = 'btn btn--small';
 				buttons[2].className = 'btn btn--small';
 				speed = 0;
+				video.playbackRate = 1.0;
+				document.querySelector('#myVideo').style.filter = 'hue-rotate(180deg)';
 			  } else if (this.innerHTML === 'Lv2') {
 				buttons[0].className = 'btn btn--small';
 				buttons[1].className = 'btn btn--small btn--selected';
 				buttons[2].className = 'btn btn--small';
 				speed = 0.3;
+				video.playbackRate = 2.0;
 			  } else if (this.innerHTML === 'Lv3') {
 				buttons[0].className = 'btn btn--small';
 				buttons[1].className = 'btn btn--small';
 				buttons[2].className = 'btn btn--small btn--selected';
 				speed = 0.5;
+				video.playbackRate = 4.0;
 			  }
 
 			  initializeNotes();
@@ -549,6 +555,7 @@ class Game extends React.Component {
 		var showResult = function () {
 		  window.$gameStart = false;
 		  SendFinish(1);
+		  video.playbackRate = 1.0;
 		  SendScore(score);
 		  document.querySelector('.perfect__count').innerHTML = hits.perfect;
 		  document.querySelector('.good__count').innerHTML = hits.good;
@@ -1002,11 +1009,15 @@ class Game extends React.Component {
 		return (
 		  <div className="Game">
 			<div id="target"></div>
+			
+			<video autoplay muted loop id="myVideo">
+			  <source src="media/cyber.mp4" type="video/mp4" />
+			</video>
 
 			<audio className="song" crossOrigin="anonymous" src="media/0.mp3"></audio>
 
 			<main>
-			  <img className="back__button" src="/img/buttonB.png" alt="my image" onClick={this.back} />
+			  <img className="back__button" src="/img/buttonC.png" alt="my image" onClick={this.back} />
 	
 			
 			  <div className="game">
@@ -1085,7 +1096,7 @@ class Game extends React.Component {
 				  </div>
 				  
 				   <div className="menu_start menu_start_s">
-					<h2>Start</h2>
+					<h2>SESSION</h2>
 					<div className="btn btn--primary btn--start game-start-button" >Start</div>
 				  </div>
 				</div>

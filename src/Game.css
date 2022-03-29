@@ -593,6 +593,31 @@ img {
   color: white;
 }
 
+#myVideo {
+  position: fixed;
+  /*filter: brightness(35%);*/
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -999;
+  transition: all .5s;
+  animation: redred 10000ms 0ms infinite;
+}
+
+@keyframes redred {
+  0% {
+    filter: hue-rotate(0deg) brightness(45%);
+  }
+  100% {
+    filter: hue-rotate(360deg) brightness(45%);
+  }
+}
+
+/*.vsc-controller{
+	display: none;
+}*/
+
 .btn:link,
 .btn:visited {
   display: inline-block;
@@ -831,7 +856,7 @@ img {
 }
 
 .connect {
-  color: var(--maxcombo-color);
+  color: rgba(142,202,245,1);
   display: none;
 }
 
